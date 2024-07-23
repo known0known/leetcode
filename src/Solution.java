@@ -1,10 +1,31 @@
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.*;
 
 
 public class Solution {
 
+    public int lengthOfLongestSubstring(String s) {
+
+        if(s.length() <= 1) return s.length();
+
+        List<String> data = new ArrayList<>(s.length());
+
+        String[] split = s.split("");
+
+        int max = 0;
+
+        for (int i = 0; i < split.length; i++) {
+            String cur = split[i];
+            if (data.contains(cur)) {
+                int x = data.indexOf(cur);
+                data = data.subList(x+ 1, data.size());
+            }
+            data.add(cur);
+            if (max < data.size()) {
+                max = data.size();
+            }
+        }
+        return max;
+    }
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode tmp1 = l1;
         ListNode tmp2 = l2;
